@@ -1,0 +1,40 @@
+# Локальные и служебные скрипты
+00_*
+00_CrRel_setup.pyw
+00_Move.pyw
+*_template.pyw
+*_GUIDE.md
+handoff.md
+Build_Tools/*.template
+Build_Tools/*_template.py
+
+# Общие исключения релизного процесса
+AGENTS.md
+logo.png
+*.lnk
+*.bat
+*.log
+*.tmp
+*.json
+*.toml
+build/
+dist/
+Resize_File_Dialogs/
+pycache/
+__pycache__/
+target/
+test_output/
+fixtures/temp/
+node_modules/
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/
+!.vscode/settings.json
+.env.local
+.env.production
+.venv/
+.ruff_cache/
+
+# Явно разрешаем spec-файлы сборки
+!Build_Tools/*.spec
