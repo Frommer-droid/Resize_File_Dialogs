@@ -1,0 +1,33 @@
+name: Verify Windows application
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install project dependencies
+        shell: pwsh
+        run: |
+          python -m venv .venv
+          .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+      - name: Lint and unit tests
+        shell: pwsh
+        run: |
+          .\.venv\Scripts\python.exe -m ruff check .
+          .\.venv\Scripts\python.exe -m unittest discover -s tests
+      - name: Frozen import smoke and binary provenance
+        shell: pwsh
+        run: .\.venv\Scripts\python.exe Build_Tools\verify_frozen_build.py
